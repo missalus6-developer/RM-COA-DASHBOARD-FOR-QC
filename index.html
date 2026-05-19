@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMP Live Deadline Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+    <div class="header-left">
+        <div class="live-dot" title="Live"></div>
+        <div class="logo">BMP <span>Deadline</span> Dashboard</div>
+    </div>
+    <div class="header-right">
+        <div class="user-selector">
+            <label>👤 User: </label>
+            <select id="userSelect" onchange="switchUser()">
+                <option value="">Select User...</option>
+            </select>
+        </div>
+        <div class="search-wrap">
+            <input id="searchBox" type="text" placeholder="Search product, GRN, step..." oninput="onSearch()">
+        </div>
+        <button class="btn" onclick="forceRefresh()">↻ Refresh</button>
+        <a href="#" id="sheetLink" target="_blank" class="btn">Open Sheet ↗</a>
+    </div>
+</div>
+
+<div class="content">
+    <div id="accessBanner" class="access-banner" style="display:none"></div>
+
+    <div class="users-grid" id="usersGrid">
+        <h3>📊 Team Members Dashboard</h3>
+        <div id="teamStats" class="team-stats"></div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" id="tabToday" onclick="switchTab('today')">
+            Today's Work <span class="badge today-badge" id="todayCount">0</span>
+        </div>
+        <div class="tab" id="tabBacklog" onclick="switchTab('backlog')">
+            Overdue <span class="badge over-badge" id="backlogCount">0</span>
+        </div>
+    </div>
+
+    <div class="filter-bar" id="dateFilterBar" style="display:none">
+        <div class="date-input-wrap">
+            <label>From</label>
+            <input type="date" id="dfFrom">
+        </div>
+        <div class="date-input-wrap">
+            <label>To</label>
+            <input type="date" id="dfTo">
+        </div>
+        <button class="btn" onclick="applyDateFilter()">Apply</button>
+        <button class="btn" onclick="clearDateFilter()">Clear</button>
+    </div>
+
+    <div class="stats-row" id="statsRow"></div>
+    <div class="cards-grid" id="cardsGrid">
+        <div class="empty-state">
+            <p>Select a user to view tasks...</p>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast" style="display:none"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
